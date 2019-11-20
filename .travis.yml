@@ -1,0 +1,12 @@
+jobs:
+  include:
+    # Backend test
+    - stage: test
+      language: java
+      java: 11
+      # before_install: cd backend
+      script: echo 'test'
+
+    # Deployment
+    - stage: deploy
+      if: branch = master
