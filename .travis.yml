@@ -1,5 +1,17 @@
 jobs:
   include:
+    - stage: lint
+      language: node_js
+      node_js:
+        - 12
+      before_install:
+        - cd frontend
+      install:
+        - yarn
+      script:
+        - yarn type-check
+        - yarn tslint
+
     # Backend test
     - stage: test
       language: java
