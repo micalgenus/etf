@@ -1,17 +1,8 @@
 {
   "name": "etf",
   "scripts": {
-    "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
-    "@babel/preset-typescript": "^7.7.2",
-    "@types/node": "^12.12.11",
-    "babel-plugin-module-resolver": "^3.2.0"
-  }
+  "license": "MIT"
 }
