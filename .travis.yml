@@ -1,3 +1,7 @@
+cache:
+  directories:
+    - $HOME/.gradle
+
 jobs:
   include:
     - stage: lint
@@ -16,8 +20,13 @@ jobs:
     - stage: test
       language: java
       java: 11
-      # before_install: cd backend
-      script: echo 'test'
+      before_install:
+        - cd backend
+        - chmod +x ./gradlew
+      script:
+        - ./gradlew test
+        # - ./gradlew integrationTest
+        # - ./gradlew wholeTest
 
     # Deployment
     - stage: deploy
