@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class EtfApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EtfApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(EtfApplication.class, args);
+  }
 
 }

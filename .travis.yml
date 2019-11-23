@@ -6,8 +6,7 @@ jobs:
   include:
     - stage: lint
       language: node_js
-      node_js:
-        - 12
+      node_js: 12
       before_install:
         - cd frontend
       install:
@@ -15,6 +14,13 @@ jobs:
       script:
         - yarn type-check
         - yarn tslint
+    - language: java
+      java: 11
+      before_install:
+        - cd backend
+        - chmod +x ./gradlew
+      script:
+        - ./gradlew check
 
     # Backend test
     - stage: test
