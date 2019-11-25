@@ -6,4 +6,4 @@ WORKDIR /spring
 EXPOSE 8080
 EXPOSE 35729
 
-CMD ["./gradlew", "bootRun", "-Pdev", "--continuous"]
+CMD ["./gradlew", "bootRun", "-Pdev"]

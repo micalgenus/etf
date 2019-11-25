@@ -1,6 +1,16 @@
 version: "3.7"
 
 services:
+  backend-watchman:
+    image: openjdk:11
+    working_dir: /spring/
+    command: ./tools/watchman.sh
+    volumes:
+      - ./backend/:/spring/
+      - type: tmpfs
+        target: /spring/.gradle
+    depends_on:
+      - backend
   backend:
     build:
       context: ./backend
