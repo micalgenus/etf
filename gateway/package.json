@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "NODE_ENV=test nodemon --watch src/ --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
     "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
+    "tslint": "tslint --project .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +16,9 @@
     "@babel/preset-typescript": "^7.7.2",
     "@types/node": "^12.12.11",
     "babel-plugin-module-resolver": "^3.2.0",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "tslint": "^5.20.1",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.7.2"
   }
 }
