@@ -6,3 +6,25 @@ spring:
     restart:
       enabled: true
       log-condition-evaluation-delta: true
+
+server:
+  ssl:
+    enabled: true
+    key-store: keystore.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+    key-alias: bns-ssl
+  port: 8443
+
+google:
+  client:
+    clientId: ${GOOGLE_OAUTH_CLIENT}
+    clientSecret: ${GOOGLE_OAUTH_SECRET}
+    accessTokenUri: https://accounts.google.com/o/oauth2/token
+    userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+    clientAuthenticationScheme: form
+    scope: 
+      - email
+      - profile
+  resource:
+    userInfoUri: https://www.googleapis.com/oauth2/v2/userinfo

@@ -15,12 +15,16 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile.dev
+    env_file: ./.env
     ports:
       - 8080:8080
+      - 8443:8443
       - 35729:35729
     volumes:
       - ./backend/:/spring/
       - gradle:/root/.gradle/
+    restart: always
+
   frontend:
     build:
       context: ./frontend
@@ -31,6 +35,7 @@ services:
       - 3000:3000
     volumes:
       - ./frontend/:/node/
+
   gateway:
     build:
       context: ./gateway
