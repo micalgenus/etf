@@ -21,6 +21,26 @@ services:
     volumes:
       - ./backend/:/spring/
       - gradle:/root/.gradle/
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile.dev
+    working_dir: /node/
+    command: /bin/bash -c "yarn && yarn dev"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/:/node/
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: ./Dockerfile.dev
+    working_dir: /node/
+    command: /bin/bash -c "yarn && yarn dev"
+    ports:
+      - 3030:3030
+    volumes:
+      - ./gateway/:/node/
 
 volumes:
   gradle:
