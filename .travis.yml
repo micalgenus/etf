@@ -20,7 +20,7 @@ jobs:
         - cd backend
         - chmod +x ./gradlew
       script:
-        - ./gradlew check
+        - ./gradlew checkstyleMain
 
     # Backend test
     - stage: test
