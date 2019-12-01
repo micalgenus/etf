@@ -61,8 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
    * comment.
    **/
   @Bean
-  public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
-    FilterRegistrationBean registration = new FilterRegistrationBean();
+  public FilterRegistrationBean<Filter> oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
+    FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
     registration.setFilter(filter);
     registration.setOrder(-100);
     return registration;
@@ -78,7 +78,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private Filter ssoFilter(ClientResources client, String path) {
     if (oauth2ClientContext != null) {
-      System.out.println(path);
       OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
       OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
       filter.setRestTemplate(restTemplate);

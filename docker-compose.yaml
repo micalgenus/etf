@@ -32,6 +32,8 @@ services:
     restart: always
     depends_on:
       - backend-mysql
+    links:
+      - backend-mysql
 
   frontend:
     build:
