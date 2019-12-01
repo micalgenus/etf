@@ -7,16 +7,16 @@ services:
     env_file: ./.env.backend
     volumes:
       - backend-mysql:/var/lib/mysql
-  backend-watchman:
-    image: openjdk:11
-    working_dir: /spring/
-    command: ./tools/watchman.sh
-    volumes:
-      - ./backend/:/spring/
-      - type: tmpfs
-        target: /spring/.gradle
-    depends_on:
-      - backend
+  # backend-watchman:
+  #   image: openjdk:11
+  #   working_dir: /spring/
+  #   command: ./tools/watchman.sh
+  #   volumes:
+  #     - ./backend/:/spring/
+  #     - type: tmpfs
+  #       target: /spring/.gradle
+  #   depends_on:
+  #     - backend
   backend:
     build:
       context: ./backend
