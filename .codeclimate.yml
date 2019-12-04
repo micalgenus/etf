@@ -1,0 +1,22 @@
+version: "2"
+plugins:
+  nodesecurity:
+    enabled: true
+  sonar-java:
+    enabled: true
+  shellcheck:
+    enabled: true
+
+exclude_patterns:
+  - "test/"
+  - "tools/"
+  - "*.yaml"
+  - "*.yml"
+  - "*.json"
+  - "*.js"
+  - "*.xml"
+  - "*.gradle"
+  - "*.sh"
+  - "*.bat"
+  - "Dockerfile*"
+  - "gradle*"
