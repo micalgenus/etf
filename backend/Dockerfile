@@ -11,7 +11,6 @@ FROM openjdk:11-jre-slim
 COPY --from=builder /spring/build/libs/*.jar /spring/
 WORKDIR /spring
 RUN mv /spring/*.jar /spring/etf.jar
-RUN ls -al /spring
 
 EXPOSE 8080
 
