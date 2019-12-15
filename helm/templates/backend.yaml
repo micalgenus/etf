@@ -1,0 +1,16 @@
+# apiVersion: apps/v1
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: {{ .Values.backend.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - image: micalgenus/etf-backend:{{ .Values.etf.version }}
+          imagePullPolicy: Always
+          name: backend

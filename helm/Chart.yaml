@@ -1,0 +1,16 @@
+name: etf
+version: 0.2
+# description:
+# keywords:
+#   -
+# home: https://github.com/micalgenus/etf
+# sources:
+#   - https://github.com/micalgenus/etf
+maintainers:
+  - name: micalgenus
+    email: micalgenus@gmail.com
+    url: https://micalgenus.github.io/
+engine: gotpl
+# icon:
+appVersion: 0.1
+# tillerVersion:

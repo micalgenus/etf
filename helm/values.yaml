@@ -1,0 +1,6 @@
+etf:
+  version: 0.1
+
+backend:
+  deployment:
+    replicas: 1
