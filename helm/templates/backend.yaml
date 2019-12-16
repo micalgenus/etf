@@ -10,6 +10,19 @@ spec:
         app: backend
     spec:
       containers:
-        - image: micalgenus/etf-backend:{{ .Values.etf.version }}
+        - image: micalgenus/etf-backend:{{ .Chart.AppVersion }}
           imagePullPolicy: Always
           name: backend
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - name: tomcat
+      port: 8080
+      targetPort: 8080
