@@ -13,7 +13,7 @@ spec:
         app: backend
     spec:
       containers:
-        - image: micalgenus/etf-backend:{{ .Chart.AppVersion }}
+        - image: micalgenus/etf:backend-{{ .Chart.AppVersion }}
           imagePullPolicy: Always
           name: backend
 
