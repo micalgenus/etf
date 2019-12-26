@@ -65,7 +65,6 @@ jobs:
             tar xf helm-v2.16.1-linux-amd64.tar.gz;
             mkdir -p $HOME/helm/bin;
             mv linux-amd64/* $HOME/helm/bin;
-            helm init --client-only;
           fi
         - export PATH=$PATH:$HOME/helm/bin
 
