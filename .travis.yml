@@ -57,8 +57,7 @@ jobs:
 
     - stage: helm
       before_install:
-        # Install Helm
-        - |
+        - | # Install Helm
           if [ ! -d "$HOME/.helm/bin" ]; then
             rm -rf "$HOME/.helm"
             wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
@@ -70,8 +69,13 @@ jobs:
           fi
         - export PATH=$PATH:$HOME/.helm/bin
 
+        # Install Google Cloud SDK
+        - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
+        - source $HOME/google-cloud-sdk/path.bash.inc
+      before_script:
+        - openssl aes-256-cbc -K $test_key -iv $test_iv -in gcloud.key.json.enc -out gcloud.key.json -d
+        - gcloud auth activate-service-account --key-file=gcloud.key.json
       script:
-        - helm repo add micalgenus https://chart.micalgenus.com/
         - helm repo add micalgenus-gcs gs://micalgenus/chart
       # if: branch = release
     # # Deployment
