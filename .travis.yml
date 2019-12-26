@@ -59,17 +59,17 @@ jobs:
       before_install:
         # Install Helm
         - |
-          if [ ! -d "$HOME/helm/bin" ]; then
-            rm -rf "$HOME/helm";
-            wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz;
-            tar xf helm-v2.16.1-linux-amd64.tar.gz;
-            mkdir -p $HOME/helm/bin;
-            mv linux-amd64/* $HOME/helm/bin;
-          fi
+          # if [ ! -d "$HOME/helm/bin" ]; then
+            rm -rf "$HOME/helm"
+            wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
+            tar xf helm-v2.16.1-linux-amd64.tar.gz
+            mkdir -p $HOME/helm/bin
+            mv linux-amd64/* $HOME/helm/bin
+            helm init --client-only
+            helm plugin install https://github.com/hayorov/helm-gcs
+          # fi
         - export PATH=$PATH:$HOME/helm/bin
 
-      before_script:
-        - helm init --client-only;
       script:
         - helm repo add micalgenus https://chart.micalgenus.com/
       # if: branch = release
