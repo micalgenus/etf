@@ -1,17 +1,13 @@
 cache:
   directories:
     - $HOME/.gradle
+    - $HOME/helm
 
 services:
   - docker
 
 jobs:
   include:
-    - stage: helm
-      language: node_js
-      script:
-        - helm
-
     # - stage: lint
     #   language: node_js
     #   node_js: 12
@@ -59,6 +55,22 @@ jobs:
     #   script:
     #     - ./gradlew test --stacktrace
 
+    - stage: helm
+      before_install:
+        # Install Helm
+        - |
+          if [ ! -d "$HOME/helm/bin" ]; then
+            rm -rf "$HOME/helm";
+            wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz;
+            tar xf helm-v2.16.1-linux-amd64.tar.gz;
+            mkdir -p $HOME/helm/bin;
+            mv linux-amd64/* $HOME/helm/bin;
+          fi
+        - export PATH=$PATH:$HOME/helm/bin
+
+      script:
+        - helm repo add micalgenus https://chart.micalgenus.com/
+      # if: branch = release
     # # Deployment
     # - stage: deploy
     #   if: branch = master
