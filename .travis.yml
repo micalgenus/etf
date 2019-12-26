@@ -65,8 +65,8 @@ jobs:
             tar xf helm-v2.16.1-linux-amd64.tar.gz
             mkdir -p $HOME/helm/bin
             mv linux-amd64/* $HOME/helm/bin
-            helm init --client-only
-            helm plugin install https://github.com/hayorov/helm-gcs
+            $HOME/helm/bin/helm init --client-only
+            $HOME/helm/bin/helm plugin install https://github.com/hayorov/helm-gcs
           # fi
         - export PATH=$PATH:$HOME/helm/bin
 
