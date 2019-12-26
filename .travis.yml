@@ -6,6 +6,10 @@ cache:
 services:
   - docker
 
+env:
+  global:
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
 jobs:
   include:
     # - stage: lint
