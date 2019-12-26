@@ -1,7 +1,7 @@
 cache:
   directories:
     - $HOME/.gradle
-    - $HOME/helm
+    - $HOME/.helm
 
 services:
   - docker
@@ -59,16 +59,16 @@ jobs:
       before_install:
         # Install Helm
         - |
-          # if [ ! -d "$HOME/helm/bin" ]; then
-            rm -rf "$HOME/helm"
+          # if [ ! -d "$HOME/.helm/bin" ]; then
+            rm -rf "$HOME/.helm"
             wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
             tar xf helm-v2.16.1-linux-amd64.tar.gz
-            mkdir -p $HOME/helm/bin
-            mv linux-amd64/* $HOME/helm/bin
-            $HOME/helm/bin/helm init --client-only
-            $HOME/helm/bin/helm plugin install https://github.com/hayorov/helm-gcs
+            mkdir -p $HOME/.helm/bin
+            mv linux-amd64/* $HOME/.helm/bin
+            $HOME/.helm/bin/helm init --client-only
+            $HOME/.helm/bin/helm plugin install https://github.com/hayorov/helm-gcs
           # fi
-        - export PATH=$PATH:$HOME/helm/bin
+        - export PATH=$PATH:$HOME/.helm/bin
 
       script:
         - helm repo add micalgenus https://chart.micalgenus.com/
