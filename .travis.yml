@@ -61,6 +61,8 @@ jobs:
     #     - ./gradlew test --stacktrace
 
     - stage: helm
+      env:
+        - GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcloud.key.json"
       before_install:
         - | # Install Helm
           if [ ! -d "$HOME/.helm/bin" ]; then
@@ -79,9 +81,9 @@ jobs:
         - source $HOME/google-cloud-sdk/path.bash.inc
       before_script:
         - openssl aes-256-cbc -K $test_key -iv $test_iv -in gcloud.key.json.enc -out gcloud.key.json -d
-        - gcloud auth activate-service-account --key-file=gcloud.key.json
+        # - gcloud auth activate-service-account --key-file=gcloud.key.json
       script:
-        - helm repo add micalgenus-gcs gs://micalgenus/chart --service-account helm-chart@micalgenus.iam.gserviceaccount.com
+        - helm repo add micalgenus-gcs gs://micalgenus/chart
       # if: branch = release
     # # Deployment
     # - stage: deploy
