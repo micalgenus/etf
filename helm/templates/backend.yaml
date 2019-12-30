@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: etf-backend
 spec:
   replicas: {{ .Values.backend.deployment.replicas }}
   selector:
     matchLabels:
-      app: backend
+      app: etf-backend
   template:
     metadata:
       labels:
-        app: backend
+        app: etf-backend
     spec:
       containers:
         - image: micalgenus/etf:backend-{{ .Chart.AppVersion }}
           imagePullPolicy: Always
-          name: backend
+          name: etf-backend
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: etf-backend
 spec:
   selector:
-    app: backend
+    app: etf-backend
   ports:
     - name: tomcat
       port: 8080
