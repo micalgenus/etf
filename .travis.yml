@@ -86,7 +86,8 @@ jobs:
       install:
         - helm repo add micalgenus-gcs gs://micalgenus/chart
         - helm repo list
-        - cat $HOME/.config/helm/repositories.yaml
+        # - cat $HOME/.config/helm/repositories.yaml
+        - ls $HOME/.helm
       before_script:
         - mv helm etf
       script:
