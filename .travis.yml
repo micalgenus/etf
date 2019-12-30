@@ -91,6 +91,8 @@ jobs:
       deploy:
         - provider: script
           script: helm gcs push etf*.tgz micalgenus-gcs --force --public --publicUrl https://chart.micalgenus.com/
+          on:
+            branch: feature/helm-chart
     # # Deployment
     # - stage: deploy
     #   if: branch = master
