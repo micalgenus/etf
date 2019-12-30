@@ -81,7 +81,7 @@ jobs:
         - openssl aes-256-cbc -K $test_key -iv $test_iv -in gcloud.key.json.enc -out gcloud.key.json -d
         - gcloud auth activate-service-account --key-file=gcloud.key.json
       script:
-        - helm repo add --service-account helm-chart@micalgenus.iam.gserviceaccount.com micalgenus-gcs gs://micalgenus/chart
+        - helm repo add micalgenus-gcs gs://micalgenus/chart --service-account helm-chart@micalgenus.iam.gserviceaccount.com
       # if: branch = release
     # # Deployment
     # - stage: deploy
