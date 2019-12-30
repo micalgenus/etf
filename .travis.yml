@@ -1,7 +1,6 @@
 cache:
   directories:
     - $HOME/.gradle
-    - $HOME/.config
     - $HOME/.helm
     - $HOME/google-cloud-sdk
 
@@ -86,12 +85,12 @@ jobs:
       install:
         - helm repo add micalgenus-gcs gs://micalgenus/chart
         - helm repo list
-        # - cat $HOME/.config/helm/repositories.yaml
-        - ls $HOME/.helm
       before_script:
         - mv helm etf
       script:
         - helm package etf
+      before_deploy:
+        - mkdir -p $HOME/.config/helm && cp $HOME/.helm/repository/repositories.yaml $HOME/.config/helm/repositories.yaml
       deploy:
         - provider: script
           script: helm gcs push etf*.tgz micalgenus-gcs --force --public --publicUrl https://chart.micalgenus.com/
