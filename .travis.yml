@@ -91,6 +91,7 @@ jobs:
         - mv helm etf
       script:
         - helm package etf
+        - helm gcs push etf*.tgz micalgenus-gcs --force --public --publicUrl https://chart.micalgenus.com/
       deploy:
         - provider: script
           script: helm gcs push etf*.tgz micalgenus-gcs --force --public --publicUrl https://chart.micalgenus.com/
