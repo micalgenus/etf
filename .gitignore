@@ -67,3 +67,5 @@ mkcert*
 localhost.p12
 
 gcloud.key.json
+
+etf*.tgz

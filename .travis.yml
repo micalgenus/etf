@@ -86,6 +86,7 @@ jobs:
         - openssl aes-256-cbc -K $test_key -iv $test_iv -in gcloud.key.json.enc -out gcloud.key.json -d
       install:
         - helm repo add micalgenus-gcs gs://micalgenus/chart
+        - helm repo list
       before_script:
         - mv helm etf
       script:
