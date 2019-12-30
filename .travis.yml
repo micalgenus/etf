@@ -67,7 +67,7 @@ jobs:
         - GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcloud.key.json"
       before_install:
         - | # Install Helm
-          # if [ ! -d "$HOME/.helm/bin" ]; then
+          if [ ! -d "$HOME/.helm/bin" ]; then
             rm -rf "$HOME/.helm"
             wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
             tar xf helm-v2.16.1-linux-amd64.tar.gz
@@ -75,7 +75,7 @@ jobs:
             mv linux-amd64/* $HOME/.helm/bin
             $HOME/.helm/bin/helm init --client-only
             $HOME/.helm/bin/helm plugin install https://github.com/hayorov/helm-gcs
-          # fi
+          fi
         - export PATH=$PATH:$HOME/.helm/bin
 
         # Install Google Cloud SDK
