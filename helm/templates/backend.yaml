@@ -44,6 +44,7 @@ spec:
       targetPort: 8080
 
 ---
+{{- if .Values.backend.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -60,9 +61,10 @@ spec:
           - backend:
               serviceName: etf-backend
               servicePort: tomcat
-{{- if .Values.backend.ingress.enabled }}
+  {{- if .Values.backend.ingress.tls.enabled }}
   tls:
     - hosts:
         # Change this to your own hostname
         - {{ .Values.backend.ingress.host }}
+  {{- end }}
 {{- end }}

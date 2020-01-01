@@ -8,6 +8,7 @@ backend:
       password: password
       rootPassword: rootPassword
   ingress:
+    enabled: false
     annotations:
       kubernetes.io/ingress.class: "nginx"
       certmanager.k8s.io/issuer: "letsencrypt-prod"
