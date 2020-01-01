@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etf-backend-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etf-backend-mysql
+  template:
+    metadata:
+      labels:
+        app: etf-backend-mysql
+    spec:
+      containers:
+        - image: mysql:5
+          imagePullPolicy: Always
+          name: etf-backend-mysql
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etf-backend-mysql
+spec:
+  selector:
+    app: etf-backend-mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
