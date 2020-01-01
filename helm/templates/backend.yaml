@@ -20,7 +20,7 @@ spec:
             - name: MYSQL_HOST
               value: etf-backend-mysql
             - name: MYSQL_PORT
-              value: 3306
+              value: {{ 3306 | quote }} 
             - name: MYSQL_DATABASE
               value: {{ .Values.backend.mysql.config.db }}
             - name: MYSQL_USER
