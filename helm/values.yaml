@@ -1,3 +1,9 @@
 backend:
   deployment:
     replicas: 1
+  mysql:
+    config:
+      db: etf
+      user: etf
+      password: password
+      rootPassword: rootPassword

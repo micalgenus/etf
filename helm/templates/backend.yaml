@@ -16,6 +16,19 @@ spec:
         - image: micalgenus/etf:backend-{{ .Chart.AppVersion }}
           imagePullPolicy: Always
           name: etf-backend
+          env:
+            - name: MYSQL_HOST
+              value: etf-backend-mysql
+            - name: MYSQL_PORT
+              value: 3306
+            - name: MYSQL_DATABASE
+              value: {{ .Values.backend.mysql.config.db }}
+            - name: MYSQL_USER
+              value: {{ .Values.backend.mysql.config.user }}
+            - name: MYSQL_PASSWORD
+              value: {{ .Values.backend.mysql.config.password }}
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.backend.mysql.config.rootPassword }}
 
 ---
 apiVersion: v1
