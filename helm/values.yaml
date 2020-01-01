@@ -16,5 +16,5 @@ backend:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
     host: backend.etf.com
     tls:
-      enabled: true
+      enabled: false
 
