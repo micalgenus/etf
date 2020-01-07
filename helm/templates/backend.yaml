@@ -18,7 +18,7 @@ spec:
           name: etf-backend
           env:
             - name: MYSQL_HOST
-              value: etf-backend-mysql
+              value: etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local
             - name: MYSQL_PORT
               value: {{ 3306 | quote }}
             - name: MYSQL_DATABASE

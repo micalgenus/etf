@@ -17,4 +17,3 @@ backend:
     host: backend.etf.com
     tls:
       enabled: false
-
