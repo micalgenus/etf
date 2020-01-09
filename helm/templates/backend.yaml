@@ -18,12 +18,7 @@ spec:
           command: [
             'sh',
             '-c',
-            'until mysqladmin \
-              --host=etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local \
-              --user={{ .Values.backend.mysql.config.user }} \
-              --password={{ .Values.backend.mysql.config.password }} \
-              status;
-            do echo waiting for MySQL; sleep 2; done;'
+            'until mysqladmin --host=etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local --user={{ .Values.backend.mysql.config.user }} --password={{ .Values.backend.mysql.config.password }} status; do echo waiting for MySQL; sleep 2; done;'
           ]
       containers:
         - image: micalgenus/etf:backend-{{ .Chart.AppVersion }}
