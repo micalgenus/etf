@@ -72,7 +72,8 @@ spec:
         # Change this to your own hostname
         - {{ .Values.backend.ingress.host }}
   {{- end }}
-{{- end }}    IizuYX7fivTKqcAvjuRporc+PNv1psOqlrN1VwEpvTM9Xn+tpxN09FS1LFtkfrIWhYrH47Idf8Sq
+{{- end }}
+
     lEhh3RmlCn4/X6DXoWnATMyc6hsUSWuvCZBz/963i6tpkjP/QJB+Gw7AwQOIEchFoSOO85SsDrox
     ZTZqWb+q4Hydbsxe/wiXqOK7kZHH6bpie82X9LvmCQGpijNbinnOsWtK2C8ChvSV8SyXkT39hM9o
     wNNwU4h/EBFZZdpsNRbY0P+Jb88YGi4+7rDp5ceTiXPlcf+QaA5hULiK0hAWOeweqAPI3nS0VKK1
