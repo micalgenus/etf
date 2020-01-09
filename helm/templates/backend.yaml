@@ -12,6 +12,19 @@ spec:
       labels:
         app: etf-backend
     spec:
+      initContainers:
+        - name: init-myservice
+          image: mysql:5
+          command: [
+            'sh',
+            '-c',
+            'until mysqladmin \
+              --host=etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local \
+              --user={{ .Values.backend.mysql.config.user }} \
+              --password={{ .Values.backend.mysql.config.password }} \
+              status;
+            do echo waiting for MySQL; sleep 2; done;'
+          ]
       containers:
         - image: micalgenus/etf:backend-{{ .Chart.AppVersion }}
           imagePullPolicy: Always
@@ -67,4 +80,10 @@ spec:
         # Change this to your own hostname
         - {{ .Values.backend.ingress.host }}
   {{- end }}
-{{- end }}
+{{- end }}    IizuYX7fivTKqcAvjuRporc+PNv1psOqlrN1VwEpvTM9Xn+tpxN09FS1LFtkfrIWhYrH47Idf8Sq
+    lEhh3RmlCn4/X6DXoWnATMyc6hsUSWuvCZBz/963i6tpkjP/QJB+Gw7AwQOIEchFoSOO85SsDrox
+    ZTZqWb+q4Hydbsxe/wiXqOK7kZHH6bpie82X9LvmCQGpijNbinnOsWtK2C8ChvSV8SyXkT39hM9o
+    wNNwU4h/EBFZZdpsNRbY0P+Jb88YGi4+7rDp5ceTiXPlcf+QaA5hULiK0hAWOeweqAPI3nS0VKK1
+    umzWJIAAYNjALIC/VT0wsVdSSsi4C46rHgK782p5vQxj15vb3KKV4m/RH2hhGSQLRgBE2KIHHyfH
+    5xT073AI8lh4TwfD+l8WeOg9UZToMD4wITAJBgUrDgMCGgUABBQLyXYe1mLWIDzPuQwQt+3NujyD
+    mgQURhxHd88v7s+ZBqvmDs7wAaau2TsCAwGGoA==
