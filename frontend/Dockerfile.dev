@@ -3,7 +3,7 @@ FROM node:12
 COPY . /node
 WORKDIR /node
 
-RUN npm install -g yarn
+RUN which yarn || npm install -g yarn
 RUN yarn
 
 EXPOSE 3000
