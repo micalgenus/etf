@@ -17,8 +17,8 @@ spring:
 
 server:
   ssl:
-    enabled: true
-    key-store: keystore.p12
+    enabled: ${SSL_ENABLE:false}
+    key-store: ${SSL_KEYSTORE:keystore.p12}
     key-store-password: changeit
     key-store-type: PKCS12
   port: 8443
