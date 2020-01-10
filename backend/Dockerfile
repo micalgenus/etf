@@ -3,7 +3,7 @@ FROM openjdk:11 as builder
 
 COPY . /spring
 WORKDIR /spring
-RUN ./gradlew build
+RUN ./gradlew build -x test -x checkstyleMain
 
 # RUN Spring
 FROM openjdk:11-jre-slim
