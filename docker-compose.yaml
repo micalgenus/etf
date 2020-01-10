@@ -30,7 +30,7 @@ services:
       context: ./frontend
       dockerfile: ./Dockerfile.dev
     working_dir: /node/
-    command: /bin/bash -c "yarn && yarn add next && yarn dev"
+    command: /bin/bash -c "yarn && yarn dev"
     ports:
       - 3000:3000
     volumes:
