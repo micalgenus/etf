@@ -15,7 +15,7 @@ spec:
       initContainers:
         - name: init-myservice
           image: mysql:5
-          command: ["sh", "-c", "echo test"]
+          command: "sh -c echo test"
 #          args: ['-c', 'until mysqladmin --host=etf-backend-mysql.{{ .Release.Namespace }}.svc.cluster.local --user={{ .Values.backend.mysql.config.user }} --password={{ .Values.backend.mysql.config.password }} status; do echo waiting for MySQL; sleep 2; done;']
       containers:
         - image: micalgenus/etf:backend-{{ .Chart.AppVersion }}
