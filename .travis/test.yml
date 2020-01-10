@@ -1,0 +1,27 @@
+jobs:
+  include:
+    # Backend test
+    - stage: test
+      language: java
+      java: 11
+      env:
+        - MYSQL_ROOT_PASSWORD=rootpassword
+        - MYSQL_HOST=localhost
+        - MYSQL_PORT=3306
+        - MYSQL_DATABASE=etf
+        - MYSQL_USER=etf
+        - MYSQL_PASSWORD=password
+      before_install:
+        - cd backend
+        - chmod +x ./gradlew
+      install:
+        - ./gradlew
+      before_script:
+        - docker run -d --name backend-mysql
+          -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+          -e MYSQL_DATABASE=$MYSQL_DATABASE
+          -e MYSQL_USER=$MYSQL_USER
+          -e MYSQL_PASSWORD=$MYSQL_PASSWORD
+          -p 3306:3306 mysql:5
+      script:
+        - ./gradlew test --stacktrace
