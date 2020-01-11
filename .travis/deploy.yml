@@ -1,0 +1,6 @@
+jobs:
+  include:
+    # Deployment
+    - stage: deploy
+      script: echo test
+      if: branch = master

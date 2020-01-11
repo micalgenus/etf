@@ -1,101 +1,14 @@
-cache:
-  directories:
-    - $HOME/.gradle
-    - $HOME/.helm
-    - $HOME/google-cloud-sdk
+version: ~> 1.0
+import:
+  # Configuration
+  - source: .travis/cache.yml
+  - source: .travis/services.yml
 
-services:
-  - docker
-
-env:
-  global:
-    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-
-jobs:
-  include:
-    # - stage: lint
-    #   language: node_js
-    #   node_js: 12
-    #   before_install:
-    #     - cd frontend
-    #   install:
-    #     - yarn
-    #   script:
-    #     - yarn type-check
-    #     - yarn tslint
-    #     - yarn sasslint
-    # - language: java
-    #   java: 11
-    #   before_install:
-    #     - cd backend
-    #     - chmod +x ./gradlew
-    #   install:
-    #     - ./gradlew
-    #   script:
-    #     - ./gradlew checkstyleMain
-
-    # # Backend test
-    # - stage: test
-    #   language: java
-    #   java: 11
-    #   env:
-    #     - MYSQL_ROOT_PASSWORD=rootpassword
-    #     - MYSQL_HOST=localhost
-    #     - MYSQL_PORT=3306
-    #     - MYSQL_DATABASE=etf
-    #     - MYSQL_USER=etf
-    #     - MYSQL_PASSWORD=password
-    #   before_install:
-    #     - cd backend
-    #     - chmod +x ./gradlew
-    #   install:
-    #     - ./gradlew
-    #   before_script:
-    #     - docker run -d --name backend-mysql
-    #       -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-    #       -e MYSQL_DATABASE=$MYSQL_DATABASE
-    #       -e MYSQL_USER=$MYSQL_USER
-    #       -e MYSQL_PASSWORD=$MYSQL_PASSWORD
-    #       -p 3306:3306 mysql:5
-    #   script:
-    #     - ./gradlew test --stacktrace
-
-    - stage: helm
-      # if: branch = release
-      env:
-        - GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcloud.key.json"
-      before_install:
-        - | # Install Helm
-          if [ ! -d "$HOME/.helm/bin" ]; then
-            rm -rf "$HOME/.helm"
-            wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
-            tar xf helm-v2.16.1-linux-amd64.tar.gz
-            mkdir -p $HOME/.helm/bin
-            mv linux-amd64/* $HOME/.helm/bin
-            $HOME/.helm/bin/helm init --client-only
-            $HOME/.helm/bin/helm plugin install https://github.com/hayorov/helm-gcs
-          fi
-        - export PATH=$PATH:$HOME/.helm/bin
-
-        # Install Google Cloud SDK
-        - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
-        - source $HOME/google-cloud-sdk/path.bash.inc
-
-        - openssl aes-256-cbc -K $test_key -iv $test_iv -in gcloud.key.json.enc -out gcloud.key.json -d
-      install:
-        - helm repo add micalgenus-gcs gs://micalgenus/chart
-      before_script:
-        - mv helm etf
-      script:
-        - helm package etf
-      before_deploy:
-        - mkdir -p $HOME/.config/helm && cp $HOME/.helm/repository/repositories.yaml $HOME/.config/helm/repositories.yaml
-      deploy:
-        - provider: script
-          script: helm gcs push etf*.tgz micalgenus-gcs --force --public --publicUrl https://chart.micalgenus.com/
-          skip_cleanup: true
-          on:
-            all_branches: true
-    # # Deployment
-    # - stage: deploy
-    #   if: branch = master
+  # Jobs
+  - source: .travis/lint.yml
+    mode: deep_merge_append
+  - source: .travis/test.yml
+    mode: deep_merge_append
+  - source: .travis/deploy.yml
+    mode: deep_merge_append
+    if: branch = master
