@@ -11,7 +11,7 @@ import:
     mode: deep_merge_append
   - source: .travis/jobs/helm.yml
     mode: deep_merge_append
-    if: branch = release
+    # if: branch = release
   - source: .travis/jobs/deploy.yml
     mode: deep_merge_append
     if: branch = master
