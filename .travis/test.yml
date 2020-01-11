@@ -7,7 +7,7 @@ jobs:
       env:
         - MYSQL_ROOT_PASSWORD=rootpassword
         - MYSQL_HOST=localhost
-        - MYSQL_PORT=3306
+        - MYSQL_PORT=$(./tools/find-port.sh)
         - MYSQL_DATABASE=etf
         - MYSQL_USER=etf
         - MYSQL_PASSWORD=password
@@ -17,11 +17,11 @@ jobs:
       install:
         - ./gradlew
       before_script:
-        - docker run -d --name backend-mysql
+        - docker run -d --name backend-mysql-$TRAVIS_JOB_NUMBER
           -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
           -e MYSQL_DATABASE=$MYSQL_DATABASE
           -e MYSQL_USER=$MYSQL_USER
           -e MYSQL_PASSWORD=$MYSQL_PASSWORD
-          -p 3306:3306 mysql:5
+          -p $MYSQL_PORT:3306 mysql:5
       script:
         - ./gradlew test --stacktrace
