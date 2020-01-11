@@ -11,4 +11,3 @@ import:
     mode: deep_merge_append
   - source: .travis/jobs/deploy.yml
     mode: deep_merge_append
-    if: branch = master
