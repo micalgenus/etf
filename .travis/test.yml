@@ -25,6 +25,7 @@ jobs:
           -p $MYSQL_PORT:3306 mysql:5
         - |
           until mysqladmin \
+            --host=$MYSQL_HOST:$MYSQL_PORT \
             --user=$MYSQL_USER \
             --password=$MYSQL_PASSWORD \
             status
