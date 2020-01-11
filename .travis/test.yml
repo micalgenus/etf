@@ -24,13 +24,13 @@ jobs:
           -e MYSQL_PASSWORD=$MYSQL_PASSWORD
           -p $MYSQL_PORT:3306 mysql:5
         - |
-          until mysqladmin
-            --user=$MYSQL_USER
-            --password=$MYSQL_PASSWORD
-            status;
+          until mysqladmin \
+            --user=$MYSQL_USER \
+            --password=$MYSQL_PASSWORD \
+            status
           do
-            echo waiting for MySQL;
-            sleep 2;
-          done;
+            echo waiting for MySQL
+            sleep 2
+          done
       script:
         - ./gradlew test --stacktrace
