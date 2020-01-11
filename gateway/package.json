@@ -1,7 +1,7 @@
 {
   "name": "etf",
   "scripts": {
-    "dev": "NODE_ENV=test nodemon --watch src/ --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
+    "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
     "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
     "tslint": "tslint --project .",
     "test": "echo \"Error: no test specified\" && exit 1"
