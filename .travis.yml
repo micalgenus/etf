@@ -5,10 +5,13 @@ import:
   - source: .travis/services.yml
 
   # Jobs
-  - source: .travis/lint.yml
+  - source: .travis/jobs/lint.yml
     mode: deep_merge_append
-  - source: .travis/test.yml
+  - source: .travis/jobs/test.yml
     mode: deep_merge_append
-  - source: .travis/deploy.yml
+  - source: .travis/jobs/helm.yml
+    mode: deep_merge_append
+    if: branch = release
+  - source: .travis/jobs/deploy.yml
     mode: deep_merge_append
     if: branch = master

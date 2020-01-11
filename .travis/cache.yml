@@ -1,3 +1,5 @@
 cache:
   directories:
     - $HOME/.gradle
+    - $HOME/.helm
+    - $HOME/google-cloud-sdk
