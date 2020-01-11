@@ -10,10 +10,6 @@ backend:
   ingress:
     enabled: false
     annotations:
-      kubernetes.io/ingress.class: "nginx"
-      certmanager.k8s.io/issuer: "letsencrypt-prod"
-      certmanager.k8s.io/acme-challenge-type: http01
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     host: backend.etf.com
     tls:
       enabled: false
