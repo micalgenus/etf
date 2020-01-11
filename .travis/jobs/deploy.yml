@@ -1,7 +1,8 @@
 jobs:
   include:
     # Helm
-    - env:
+    - if: branch = release
+      env:
         - GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcloud.key.json"
       before_install:
         - | # Install Helm
