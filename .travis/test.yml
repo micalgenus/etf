@@ -9,10 +9,15 @@ jobs:
         - MYSQL_PORT=3306
         - MYSQL_DATABASE=etf
         - MYSQL_USER=travis
+        - MYSQL_PASSWORD=password
       before_install:
         - cd backend
         - chmod +x ./gradlew
-        - mysql -e 'CREATE DATABASE '$MYSQL_DATABASE'; GRANT ALL PRIVILEGES ON '$MYSQL_DATABASE'.* TO "'$MYSQL_DATABASE'"@"%";'
+        - |
+          mysql -e 'CREATE DATABASE '$MYSQL_DATABASE';'
+          mysql -e 'CREATE USER "user"@"%" IDENTIFIED BY "password";'
+          mysql -e 'GRANT ALL PRIVILEGES ON '$MYSQL_DATABASE'.* TO "'$MYSQL_DATABASE'"@"%";'
+          mysql -e 'FLUSH PRIVILEGES;'
       install:
         - ./gradlew
       script:
