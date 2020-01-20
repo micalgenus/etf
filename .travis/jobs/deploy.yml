@@ -1,7 +1,8 @@
 jobs:
   include:
     # Helm
-    - if: branch = release
+    - stage: deploy
+      if: branch = release
       env:
         - GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcloud.key.json"
       before_install:
@@ -39,6 +40,5 @@ jobs:
 
     # Deployment
     - if: branch = master
-      stage: deploy
       script: echo test
       
