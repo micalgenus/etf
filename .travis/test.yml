@@ -26,12 +26,7 @@ jobs:
           -p $MYSQL_PORT:3306 mysql:5
         - docker ps -a
         - |
-          until mysqladmin \
-            --host=$MYSQL_HOST \
-            --port=$MYSQL_PORT \
-            --user=root \
-            --password=$MYSQL_ROOT_PASSWORD \
-            status
+          until bash -c "mysqladmin --host=$MYSQL_HOST --port=$MYSQL_PORT --user=root --password=$MYSQL_ROOT_PASSWORD status"
           do
             echo waiting for MySQL
             sleep 2
