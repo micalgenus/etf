@@ -17,12 +17,14 @@ jobs:
       install:
         - ./gradlew
       before_script:
+        - set -x
         - docker run -d --name backend-mysql-$TRAVIS_JOB_NUMBER
           -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
           -e MYSQL_DATABASE=$MYSQL_DATABASE
           -e MYSQL_USER=$MYSQL_USER
           -e MYSQL_PASSWORD=$MYSQL_PASSWORD
           -p $MYSQL_PORT:3306 mysql:5
+        - docker ps -a
         - |
           until mysqladmin \
             --host=$MYSQL_HOST \
@@ -36,3 +38,5 @@ jobs:
           done
       script:
         - ./gradlew test --stacktrace
+      after_script:
+        - set +x
