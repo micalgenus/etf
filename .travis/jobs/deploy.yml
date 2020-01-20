@@ -21,7 +21,7 @@ jobs:
         - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
         - source $HOME/google-cloud-sdk/path.bash.inc
 
-        - openssl aes-256-cbc -K $test_key -iv $test_iv -in gcloud.key.json.enc -out gcloud.key.json -d
+        - openssl aes-256-cbc -K $helm_gcs_key -iv $helm_gcs_iv -in gcloud.key.json.enc -out gcloud.key.json -d
       install:
         - helm repo add micalgenus-gcs gs://micalgenus/chart
       before_script:
