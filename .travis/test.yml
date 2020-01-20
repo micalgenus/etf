@@ -5,13 +5,14 @@ jobs:
       language: java
       java: 11
       env:
+        - MYSQL_HOST=localhost
         - MYSQL_PORT=3306
         - MYSQL_DATABASE=etf
         - MYSQL_USER=travis
       before_install:
         - cd backend
         - chmod +x ./gradlew
-        - mysql -e 'CREATE DATABASE IF NOT EXISTS '$MYSQL_DATABASE';'
+        - mysql -e 'CREATE DATABASE '$MYSQL_DATABASE'; GRANT ALL PRIVILEGES ON '$MYSQL_DATABASE'.* TO '$MYSQL_DATABASE'@%;'
       install:
         - ./gradlew
       script:
