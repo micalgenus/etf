@@ -15,8 +15,8 @@ jobs:
         - chmod +x ./gradlew
         - |
           mysql -e 'CREATE DATABASE '$MYSQL_DATABASE';'
-          mysql -e 'CREATE USER "'$MYSQL_USER'"@"%" IDENTIFIED BY "'$MYSQL_PASSWORD'";'
-          mysql -e 'GRANT ALL PRIVILEGES ON '$MYSQL_DATABASE'.* TO "'$MYSQL_USER'"@"%";'
+          mysql -e 'CREATE USER "'$MYSQL_USER'"@"localhost" IDENTIFIED BY "'$MYSQL_PASSWORD'";'
+          mysql -e 'GRANT ALL PRIVILEGES ON '$MYSQL_DATABASE'.* TO "'$MYSQL_USER'"@"localhost";'
           mysql -e 'FLUSH PRIVILEGES;'
         - mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e 'SHOW DATABASES';
       install:
