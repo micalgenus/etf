@@ -11,9 +11,8 @@ jobs:
       before_install:
         - cd backend
         - chmod +x ./gradlew
+        - mysql -e "CRATE DATABASE $MYSQL_DATABASE;"
       install:
         - ./gradlew
-      before_script:
-        - mysql -e "CRATE DATABASE $MYSQL_DATABASE"
       script:
         - ./gradlew test --stacktrace
