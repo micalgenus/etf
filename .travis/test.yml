@@ -27,8 +27,8 @@ jobs:
           until mysqladmin \
             --host=$MYSQL_HOST \
             --port=$MYSQL_PORT \
-            --user=$MYSQL_USER \
-            --password=$MYSQL_PASSWORD \
+            --user=root \
+            --password=$MYSQL_ROOT_PASSWORD \
             status
           do
             echo waiting for MySQL
