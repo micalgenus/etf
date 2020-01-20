@@ -38,6 +38,7 @@ jobs:
             all_branches: true
 
     # Deployment
-    - stage: deploy
+    - if: branch = master
+      stage: deploy
       script: echo test
-      if: branch = master
+      
