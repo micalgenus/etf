@@ -19,5 +19,3 @@
     ```
 
 4. Move certification to `backend` and rename `keystore.p12`
-
-<!-- helm delete --purge etf && helm install --name etf --namespace etf micalgenus/etf -->
