@@ -11,6 +11,7 @@ jobs:
         - MYSQL_DATABASE=etf
         - MYSQL_USER=etf
         - MYSQL_PASSWORD=password
+        - REDIS_PORT=$(./tools/find-port.sh)
       before_install:
         - cd backend
         - chmod +x ./gradlew
@@ -22,6 +23,10 @@ jobs:
           -e MYSQL_DATABASE=$MYSQL_DATABASE
           -e MYSQL_USER=$MYSQL_USER
           -e MYSQL_PASSWORD=$MYSQL_PASSWORD
-          -p $MYSQL_PORT:3306 mysql:5
+          -p $MYSQL_PORT:3306
+          mysql:5
+        - docker run -d --name backend-redis-$TRAVIS_JOB_NUMBER 
+          -p $REDIS_PORT:6379
+          redis:5
       script:
         - ./gradlew test --stacktrace

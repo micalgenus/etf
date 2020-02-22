@@ -1,6 +1,10 @@
-version: "3.7"
+version: '3.7'
 
 services:
+  backend-redis:
+    image: redis:5
+    restart: always
+    env_file: ./.env.backend
   backend-mysql:
     image: mysql:5
     restart: always
@@ -49,3 +53,4 @@ services:
 volumes:
   backend-gradle:
   backend-mysql:
+  backend-redis:
