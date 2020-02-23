@@ -1,6 +1,6 @@
-package com.micalgenus.etf.config;
+package com.blackcowmoo.etf.config;
 
-import com.micalgenus.etf.resource.ClientResources;
+import com.blackcowmoo.etf.resource.ClientResources;
 
 import java.util.ArrayList;
 import java.util.List;

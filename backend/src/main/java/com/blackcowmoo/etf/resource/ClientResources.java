@@ -1,4 +1,4 @@
-package com.micalgenus.etf.resource;
+package com.blackcowmoo.etf.resource;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
