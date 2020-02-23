@@ -1,4 +1,4 @@
-package com.micalgenus.etf.model;
+package com.blackcowmoo.etf.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
