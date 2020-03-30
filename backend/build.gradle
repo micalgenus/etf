@@ -24,9 +24,13 @@ dependencies {
 	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.5.RELEASE'
 	compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.0.0.RELEASE'
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+    exclude module: 'junit'
+  }
+  testImplementation('org.junit.jupiter:junit-jupiter-api:5.2.0')
+  testCompile('org.junit.jupiter:junit-jupiter-params:5.2.0')
+  testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0')
 }
 
 test {
