@@ -22,14 +22,12 @@ public class RedisTest {
     redisTemplate.opsForValue().set(key, value);
 
     // redis에서 get
-    RedisVO redisVO = (RedisVO) redisTemplate.opsForValue().get(key);
+    // RedisVO redisVO = (RedisVO) redisTemplate.opsForValue().get(key);
 
     // redis에서 data delete
     redisTemplate.delete(key);
 
     // redis에 해당 key를 가지고 있는지 확인
-    if (!redisTemplate.hasKey("999")) {
-      System.out.println("key 미존재");
-    }
+    assertThat(redisTemplate.hasKey("999"), equalTo(value))
   }
 }

@@ -22,9 +22,6 @@ public class RedisConfig {
   @Value("${spring.redis.port}")
   private int redisPort;
 
-  // @Autowired
-  // private final RedisProperties redisProperties;
-
   // lettuce
   @Bean
   public RedisConnectionFactory redisConnectionFactory() {
@@ -32,12 +29,8 @@ public class RedisConfig {
     redisStandaloneConfiguration.setHostName(redisHost);
     redisStandaloneConfiguration.setPort(redisPort);
     // 패스워드 있으면 설정
-    // redisStandaloneConfiguration.setPassword(redisPwd);
     LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
     return lettuceConnectionFactory;
-
-    // return new LettuceConnectionFactory(redisProperties.getHost(),
-    // redisProperties.getPort());
   }
 
   @Bean
