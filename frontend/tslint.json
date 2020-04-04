@@ -1,6 +1,4 @@
 {
   "extends": "../tslint.json",
-  "rules": {
-    "semicolon": [true, "always"]
-  }
+  "rules": {}
 }
