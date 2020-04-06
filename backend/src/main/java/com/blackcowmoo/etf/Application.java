@@ -1,4 +1,4 @@
-package com.micalgenus.etf;
+package com.blackcowmoo.etf;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
