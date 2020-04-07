@@ -4,7 +4,7 @@
     "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
     "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
     "tslint": "tslint --project .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "type-check": "tsc --noEmit"
   },
   "author": "",
   "license": "MIT",

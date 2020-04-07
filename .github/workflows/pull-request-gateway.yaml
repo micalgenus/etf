@@ -1,0 +1,59 @@
+name: github-actions/pull-request/gateway
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  check:
+    name: Code checking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ./gateway/node_modules
+          key: gateway-default-${{ hashFiles('gateway/yarn.lock') }}
+          restore-keys: gateway-default
+
+      - working-directory: gateway
+        run: yarn
+
+      - working-directory: gateway
+        run: yarn tslint
+
+      - working-directory: gateway
+        run: yarn type-check
+
+  test:
+    name: Build and test
+    needs: check
+
+    strategy:
+      matrix:
+        node: [10, 12]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ./gateway/node_modules
+          key: gateway-${{ matrix.node }}-${{ hashFiles('gateway/yarn.lock') }}
+          restore-keys: gateway-${{ matrix.node }}
+
+      - working-directory: gateway
+        run: yarn
+
+      - working-directory: gateway
+        run: yarn build

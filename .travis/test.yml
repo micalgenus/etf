@@ -7,7 +7,7 @@ jobs:
       env:
         - MYSQL_ROOT_PASSWORD=rootpassword
         - MYSQL_HOST=localhost
-        - MYSQL_PORT=$(./tools/find-port.sh)
+        - MYSQL_PORT=3306
         - MYSQL_DATABASE=etf
         - MYSQL_USER=etf
         - MYSQL_PASSWORD=password

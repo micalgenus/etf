@@ -1,4 +1,11 @@
 version: ~> 1.0
+
+branches:
+  only:
+    - develop
+    - master
+    - release
+
 import:
   # Configuration
   - source: .travis/cache.yml
