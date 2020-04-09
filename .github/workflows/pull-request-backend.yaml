@@ -43,9 +43,9 @@ jobs:
           while ! mysqladmin ping -h${{ env.MYSQL_HOST }} -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} --silent; do
             sleep 1
           done
-      # TODO: checkstyle
-      # - working-directory: backend
-      #   run: ./gradlew check --stacktrace
+
+      - working-directory: backend
+        run: ./gradlew check --stacktrace
   # test:
   #   name: Test
   #   strategy:
