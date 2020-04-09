@@ -29,10 +29,10 @@ jobs:
           restore-keys: backend-${{ matrix.java }}
 
       - working-directory: backend
-        run: ./gradlew check --stacktrace -x test
+        run: ./gradlew check -x test --stacktrace
 
       - working-directory: backend
-        run: ./gradlew build -x test -x checkstyleMain
+        run: ./gradlew build -x test -x checkstyleMain --stacktrace
 
   test:
     name: Test
@@ -71,4 +71,4 @@ jobs:
           done
 
       - working-directory: backend
-        run: ./gradlew test -x checkstyleMain
+        run: ./gradlew test -x checkstyleMain --stacktrace
