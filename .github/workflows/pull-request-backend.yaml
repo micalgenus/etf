@@ -4,26 +4,16 @@ on:
     branches:
       - develop
 
+env:
+  MYSQL_HOST: 127.0.0.1
+  MYSQL_PORT: 3306
+  MYSQL_USER: etf
+  MYSQL_PASSWORD: password
+  MYSQL_ROOT_PASSWORD: rootpassword
+
 jobs:
   check:
     name: Code checking
-    env:
-      MYSQL_HOST: 127.0.0.1
-      MYSQL_PORT: 3306
-      MYSQL_USER: etf
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: rootpassword
-
-    services:
-      mysql:
-        image: mysql:5
-        env:
-          MYSQL_USER: etf
-          MYSQL_PASSWORD: password
-          MYSQL_DATABASE: etf
-          MYSQL_ROOT_PASSWORD: rootpassword
-        ports:
-          - 3306:3306/tcp
 
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +28,42 @@ jobs:
           key: backend-${{ matrix.java }}-${{ hashFiles('backend/.gradle') }}
           restore-keys: backend-${{ matrix.java }}
 
+      - working-directory: backend
+        run: ./gradlew check --stacktrace -x test
+
+      - working-directory: backend
+        run: ./gradlew build -x test -x checkstyleMain
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [8, 9, 10, 11]
+
+    services:
+      mysql:
+        image: mysql:5
+        env:
+          MYSQL_USER: etf
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: etf
+          MYSQL_ROOT_PASSWORD: rootpassword
+        ports:
+          - 3306:3306/tcp
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle
+          key: backend-${{ matrix.java }}-${{ hashFiles('backend/.gradle') }}
+          restore-keys: backend-${{ matrix.java }}
+
       - name: Waiting for launch MySQL
         run: |
           while ! mysqladmin ping -h${{ env.MYSQL_HOST }} -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} --silent; do
@@ -45,9 +71,4 @@ jobs:
           done
 
       - working-directory: backend
-        run: ./gradlew check --stacktrace -x test
-  # test:
-  #   name: Test
-  #   strategy:
-  #     matrix:
-  #       java: [8, 9, 10, 11]
+        run: ./gradlew test -x checkstyleMain
