@@ -46,6 +46,10 @@ jobs:
 
       - working-directory: backend
         run: ./gradlew check --stacktrace
+
+      - if: failure()
+        working-directory: backend
+        run: cat ./build/reports/tests/test/index.html
   # test:
   #   name: Test
   #   strategy:
