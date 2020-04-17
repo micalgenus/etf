@@ -72,3 +72,9 @@ jobs:
 
       - working-directory: backend
         run: ./gradlew test -x checkstyleMain --stacktrace
+
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: gradle
+          path: ./backend/build
