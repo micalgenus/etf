@@ -6,14 +6,18 @@ spring:
     restart:
       enabled: true
       log-condition-evaluation-delta: true
-  datasource:
-    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update # 운영시에는 validate 추천
     show-sql: true
+
+hibernate:
+  dialect: org.hibernate.dialect.MySQLDialect
+  connection:
+    driver_class: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
 
 server:
   ssl:
