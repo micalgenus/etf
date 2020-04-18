@@ -36,6 +36,8 @@ jobs:
 
   test:
     name: Test
+    needs: check
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -76,5 +78,5 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: gradle
+          name: gradle-${{ GITHUB_ACTION }}
           path: ./backend/build
