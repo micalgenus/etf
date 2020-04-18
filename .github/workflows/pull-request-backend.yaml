@@ -3,6 +3,8 @@ on:
   pull_request:
     branches:
       - develop
+    paths:
+      - backend/**
 
 env:
   MYSQL_HOST: 127.0.0.1

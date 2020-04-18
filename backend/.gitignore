@@ -34,3 +34,5 @@ out/
 
 ### MISC ###
 *.p12
+
+# github actions trigger
