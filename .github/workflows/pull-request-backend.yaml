@@ -80,5 +80,5 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: gradle
+          name: gradle-${{ github.sha }}
           path: ./backend/build
